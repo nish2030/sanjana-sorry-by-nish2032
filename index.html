@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I'm Sorry Sanjana ❤️</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at top, #ffd1dc, #ff9a9e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .screen { display: none; padding: 20px; }
+    .screen.active { display: block; animation: fadeIn 1.2s ease; }
+
+    button {
+      padding: 14px 32px;
+      font-size: 17px;
+      border: none;
+      border-radius: 40px;
+      background: #ff4d6d;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,77,109,0.7), 0 0 30px rgba(255,77,109,0.6);
+    }
+
+    img {
+      max-width: 280px;
+      border-radius: 22px;
+      box-shadow:
+        0 0 20px rgba(255,105,180,0.8),
+        0 0 40px rgba(255,105,180,0.7),
+        0 0 60px rgba(255,182,193,0.6);
+      animation: photoGlow 3s infinite alternate;
+    }
+
+    @keyframes photoGlow {
+      from {
+        box-shadow:
+          0 0 15px rgba(255,105,180,0.6),
+          0 0 30px rgba(255,105,180,0.5);
+      }
+      to {
+        box-shadow:
+          0 0 30px rgba(255,20,147,0.9),
+          0 0 60px rgba(255,105,180,0.8),
+          0 0 90px rgba(255,182,193,0.7);
+      }
+    }
+
+    .text-box {
+      background: rgba(255,255,255,0.92);
+      padding: 26px;
+      border-radius: 22px;
+      max-width: 520px;
+      margin: auto;
+      font-size: 18px;
+      line-height: 1.7;
+      box-shadow: 0 0 20px rgba(255,182,193,0.5);
+    }
+
+    .bear { font-size: 110px; filter: drop-shadow(0 0 10px pink); }
+
+    .glow-name {
+      font-size: 34px;
+      font-weight: bold;
+      color: #ff2f92;
+      animation: glow 2s infinite;
+    }
+
+    @keyframes glow {
+      0% { text-shadow: 0 0 8px #ff8fcf; }
+      50% { text-shadow: 0 0 30px #ff2f92, 0 0 60px #ff69b4; }
+      100% { text-shadow: 0 0 8px #ff8fcf; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 20, 147, 0.9);
+      animation: floatUp 8s linear infinite, heartGlow 2s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes heartGlow {
+      from { text-shadow: 0 0 5px #ff69b4; }
+      to { text-shadow: 0 0 20px #ff1493, 0 0 40px #ff69b4; }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<audio id="bgm" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="screen active" id="screen1">
+  <h2 class="glow-name">🚪 Knock Knock Sanjana ✨</h2>
+  <p>Someone misses you a lot ❤️</p>
+  <button onclick="startExperience()">Open the Door</button>
+</div>
+
+<div class="screen" id="screen2">
+  <h2>Some beautiful memories 💕</h2>
+  <img id="photo" src="image1.jpg" alt="Sanjana" />
+  <br><br>
+  <button onclick="nextPhoto()">Next</button>
+</div>
+
+<div class="screen" id="screen3">
+  <div class="text-box">
+    <p>
+      I am sorry Sanjana ❤️<br><br>
+      I love you so much. Sometimes I may irritate you,
+      but I love you a lot more than myself.<br><br>
+      Please forgive your bear 🐻
+    </p>
+  </div>
+  <br>
+  <button onclick="nextScreen(4)">One Last Thing</button>
+</div>
+
+<div class="screen" id="screen4">
+  <div class="bear">🐻</div>
+  <div class="text-box">
+    <h2>I love you so much my ras malai 💖</h2>
+    <p style="font-size:16px">
+      🎵 Listen to this song — it is just for you<br>
+      Complete listen and enjoy ❤️
+    </p>
+  </div>
+</div>
+
+<script>
+  let currentPhoto = 0;
+  const photos = ['image1.jpg','image2.jpg','image3.jpg'];
+
+  function startExperience() {
+    document.getElementById('bgm').play();
+    nextScreen(2);
+  }
+
+  function nextScreen(n) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen' + n).classList.add('active');
+  }
+
+  function nextPhoto() {
+    currentPhoto++;
+    if (currentPhoto < photos.length) {
+      document.getElementById('photo').src = photos[currentPhoto];
+    } else {
+      nextScreen(3);
+    }
+  }
+
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.bottom = '-20px';
+    heart.style.fontSize = (18 + Math.random() * 20) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+  }, 300);
+</script>
+
+</body>
+</html>
