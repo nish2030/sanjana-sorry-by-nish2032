@@ -16,9 +16,16 @@
       height: 100vh;
       overflow: hidden;
       text-align: center;
+      position: relative;
     }
 
-    .screen { display: none; padding: 20px; }
+    .screen {
+      display: none;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
+    }
+    .screen.active { display: block; animation: fadeIn 1.2s ease; }
     .screen.active { display: block; animation: fadeIn 1.2s ease; }
 
     button {
@@ -89,6 +96,7 @@
 
     .heart {
       position: absolute;
+      z-index: 1; /* behind everything */
       color: rgba(255, 20, 147, 0.9);
       animation: floatUp 8s linear infinite, heartGlow 2s infinite alternate;
       pointer-events: none;
