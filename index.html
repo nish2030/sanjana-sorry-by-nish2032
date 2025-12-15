@@ -152,6 +152,14 @@
   let currentPhoto = 0;
   const photos = ['image1.jpg','image2.jpg','image3.jpg'];
 
+  // Preload images to avoid delay on Next
+  const preloadedImages = [];
+  photos.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    preloadedImages.push(img);
+  });
+
   function startExperience() {
     document.getElementById('bgm').play();
     nextScreen(2);
